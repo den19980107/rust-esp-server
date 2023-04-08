@@ -1,0 +1,34 @@
+[package]
+name = "esp-server"
+version = "0.1.0"
+authors = ["paul_tseng <paul_tseng@gss.com.tw>"]
+edition = "2021"
+resolver = "2"
+
+[profile.release]
+opt-level = "s"
+
+[profile.dev]
+debug = true # Symbols are nice and they don't increase the size on Flash
+opt-level = "z"
+
+[features]
+default = ["experimental"]
+pio = ["esp-idf-sys/pio"]
+experimental = ["esp-idf-svc/experimental", "embedded-svc/experimental"]
+
+[dependencies]
+anyhow = {version = "1", features = ["backtrace"]}
+esp-idf-sys = { version = "0.32", features = ["binstart"] }
+esp-idf-svc = "0.45"
+esp-idf-hal = "0.40"
+embedded-svc = "0.24"
+embedded-hal = "0.2"
+log = "0.4.17"
+dht11 = "0.3.1"
+dotenvy = "0.15.7"
+dotenv_codegen = "0.15.0"
+
+
+[build-dependencies]
+embuild = "0.30.4"
